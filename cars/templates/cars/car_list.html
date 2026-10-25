@@ -1,0 +1,36 @@
+{% extends 'cars/base.html' %}
+{% block content %}
+<h4>Car Data</h4>
+
+<form method="get" class="mb-3">
+  <div class="input-group">
+    <input type="text" name="q" value="{{ q }}" class="form-control"
+           placeholder="Search name / brand / model">
+    <button type="submit" class="btn btn-primary">Search</button>
+    <a href="{% url 'car_list' %}" class="btn btn-secondary">Reset</a>
+  </div>
+</form>
+
+<table class="table table-bordered">
+  <thead>
+    <tr><th>ID</th><th>Name</th><th>Brand</th><th>Model</th><th>Price</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    {% for c in cars %}
+    <tr>
+      <td>{{ c.id }}</td>
+      <td>{{ c.carname }}</td>
+      <td>{{ c.carbrand }}</td>
+      <td>{{ c.carmodel }}</td>
+      <td>{{ c.carprice }}</td>
+      <td>
+        <a href="{% url 'car_update' c.id %}" class="btn btn-sm btn-warning">Update</a>
+        <a href="{% url 'car_delete' c.id %}" class="btn btn-sm btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6">Data tidak ditemukan.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

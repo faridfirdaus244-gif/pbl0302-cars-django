@@ -1,0 +1,10 @@
+{% extends 'cars/base.html' %}
+{% block content %}
+<h4>Delete Car Data</h4>
+<p>Yakin ingin menghapus <strong>{{ car.carname }}</strong> ({{ car.carbrand }} {{ car.carmodel }})?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Ya, hapus</button>
+  <a href="{% url 'car_list' %}" class="btn btn-secondary">Batal</a>
+</form>
+{% endblock %}
